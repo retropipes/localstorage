@@ -12,7 +12,7 @@ Note that this library has absolutely nothing to do with [Window.localStorage](h
 ### Installing
 First, you might want to dive into the [examples in this document](#examples). Want more, have a look [at the tests](https://github.com/retropipes/localstorage/tree/master/LocalStorage.Tests). 
 
-Once you're game, simply add it to your project [through NuGet](https://www.nuget.org/packages/RetroPipes.LocalStorage).
+Once you're game, simply add it to your project [through NuGet](https://www.nuget.org/packages/RetroPipes.LocalStorage) (once it's on NuGet.org).
 
 NuGet Package Manager: 
 
@@ -21,6 +21,8 @@ NuGet Package Manager:
 NuGet CLI:
 
     $ nuget install RetroPipes.LocalStorage
+
+This WOULD work if I knew how to publish NuGet packages...
 
 ### Prerequisites
 The LocalStorage library is built on **net7.0**. This means it's compatible with .NET 7 and up is NOT compatible with traditional .NET.
