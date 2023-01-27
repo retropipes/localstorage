@@ -1,30 +1,26 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0</TargetFrameworks>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    
+    <TargetFrameworks>net7.0</TargetFrameworks>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>    
     <!-- NuGet Specifics -->
-    <Authors>Juliën Hanssens</Authors>
+    <Authors>RetroPipes</Authors>
     <Company />
-    <Description>A simple and lightweight, in-memory key/value-pair storage for persisting data in dotnet (core) apps.</Description>
-    <PackageProjectUrl>https://github.com/hanssens/localstorage-for-dotnet</PackageProjectUrl>
+    <Description>A simple and lightweight, in-memory key/value-pair storage for persisting data in dotnet apps.</Description>
+    <PackageProjectUrl>https://github.com/retropipes/localstorage</PackageProjectUrl>
     <PackageReleaseNotes>See the releases page on GitHub for release notes:
-      https://github.com/hanssens/localstorage-for-dotnet/releases
+      https://github.com/retropipes/localstorage/releases
     </PackageReleaseNotes>
     <PackageTags>c#, dotnet, storage, cache, nosql, keyvalue, database, lightweight</PackageTags>
     <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://github.com/hanssens/localstorage-for-dotnet</RepositoryUrl>
-    <RootNamespace>Hanssens.Net</RootNamespace>
+    <RepositoryUrl>https://github.com/retropipes/localstorage</RepositoryUrl>
+    <RootNamespace>RetroPipes.LocalStorage</RootNamespace>
     <Title>LocalStorage</Title>
-    <Version>2.1.0</Version>
+    <Version>3.0.0</Version>
   </PropertyGroup>
-  
   <ItemGroup>
     <Folder Include="Helpers" />
   </ItemGroup>
-  
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
   </ItemGroup>
-  
 </Project>

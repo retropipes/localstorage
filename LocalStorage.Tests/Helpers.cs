@@ -1,7 +1,7 @@
 ﻿using System;
-using Hanssens.Net;
+using RetroPipes;
 
-namespace LocalStorageTests
+namespace RetroPipes.LocalStorageTests
 {
     internal static class TestHelpers
     {

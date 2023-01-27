@@ -10,28 +10,26 @@ Note that this library has absolutely nothing to do with [Window.localStorage](h
 ## Getting Started
 
 ### Installing
-First, you might want to dive into the [examples in this document](#examples). Want more, have a look [at the tests](https://github.com/hanssens/localstorage-for-dotnet/tree/master/LocalStorage.Tests). 
+First, you might want to dive into the [examples in this document](#examples). Want more, have a look [at the tests](https://github.com/retropipes/localstorage/tree/master/LocalStorage.Tests). 
 
-Once you're game, simply add it to your project [through NuGet](https://www.nuget.org/packages/LocalStorage).
+Once you're game, simply add it to your project [through NuGet](https://www.nuget.org/packages/RetroPipes.LocalStorage).
 
 NuGet Package Manager: 
 
-    $ Install-Package LocalStorage
+    $ Install-Package RetroPipes.LocalStorage
 
 NuGet CLI:
 
-    $ nuget install LocalStorage
+    $ nuget install RetroPipes.LocalStorage
 
 ### Prerequisites
-The LocalStorage library is built on **netstandard2.0**. This means it's compatible with .NET Core 2.x and up and traditional .NET 4.6.1 and higher. See the Microsoft [docs on .NET Standard compatibility](https://docs.microsoft.com/en-us/dotnet/standard/net-standard#net-platforms-support). 
-
-For traditional .NET 4.6.1+, you also need to have a more recent version of NuGet installed (NuGet v3.6 and up), which comes out-of-the-box with the latest updated versions of Visual Studio 2017 and [JetBrains Rider](https://www.jetbrains.com/rider/).
+The LocalStorage library is built on **net7.0**. This means it's compatible with .NET 7 and up is NOT compatible with traditional .NET.
 
 ## If you've got an issue...
 
-... [grab a tissue](https://www.youtube.com/watch?v=UmnN3eVMWgA). No, seriously; don't hesitate to [post an issue](https://github.com/hanssens/localstorage-for-dotnet/issues), or send me a message at [@jhanssens](https://twitter.com/jhanssens).
+... [grab a tissue](https://www.youtube.com/watch?v=UmnN3eVMWgA). No, seriously; don't hesitate to [post an issue](https://github.com/retropipes/localstorage/issues), or send me a message at [@retropipes](https://twitter.com/retropipes).
 
-LocalStorage is Copyright &copy; 2016-2017 [Juliën Hanssens](https://hanssens.com) under the [MIT license](LICENSE.txt).
+LocalStorage is Copyright &copy; 2016-2017 [Juliën Hanssens](https://hanssens.com) under the [MIT license](LICENSE.txt), updated by [RetroPipes](https://retropipes.org/) 2023-present.
 
 ## Documentation
 

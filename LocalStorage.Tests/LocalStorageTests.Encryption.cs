@@ -1,10 +1,10 @@
 ﻿using FluentAssertions;
-using Hanssens.Net;
-using Hanssens.Net.Helpers;
+using RetroPipes;
+using RetroPipes.Helpers;
 using System;
 using Xunit;
 
-namespace LocalStorageTests
+namespace RetroPipes.LocalStorageTests
 {
     public class EncryptionTests
     {

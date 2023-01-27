@@ -1,6 +1,6 @@
 using System;
 
-namespace Hanssens.Net
+namespace RetroPipes
 {
     public class LocalStorageException : Exception
     {

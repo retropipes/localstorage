@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 
-namespace Hanssens.Net
+namespace RetroPipes
 {
     internal class Store : Dictionary<string, string>
     {
-        
+
     }
 }

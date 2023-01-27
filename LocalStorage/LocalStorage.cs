@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Hanssens.Net.Helpers;
+using RetroPipes.Helpers;
 using Newtonsoft.Json;
 
-namespace Hanssens.Net
+namespace RetroPipes
 {
     /// <summary>
     /// A simple and lightweight tool for persisting data in dotnet (core) apps.
@@ -16,7 +16,7 @@ namespace Hanssens.Net
         private readonly ILocalStorageConfiguration _config;
         private readonly string _encryptionKey;
         private Store Storage { get; set; } = new Store();
-        
+
         private object writeLock = new object();
 
         /// <summary>
@@ -39,7 +39,8 @@ namespace Hanssens.Net
         {
             _config = configuration ?? throw new ArgumentNullException(nameof(configuration));
 
-            if (_config.EnableEncryption) {
+            if (_config.EnableEncryption)
+            {
                 if (string.IsNullOrEmpty(encryptionKey)) throw new ArgumentNullException(nameof(encryptionKey), "When EnableEncryption is enabled, an encryptionKey is required when initializing the LocalStorage.");
                 _encryptionKey = encryptionKey;
             }
@@ -78,7 +79,7 @@ namespace Hanssens.Net
             if (_config.EnableEncryption)
                 raw = CryptographyHelpers.Decrypt(_encryptionKey, _config.EncryptionSalt, raw);
 
-            return JsonConvert.DeserializeObject<T>(raw);
+            return JsonConvert.DeserializeObject<T>(raw, _config.SerializerSettings);
         }
 
         public IReadOnlyCollection<string> Keys()
@@ -95,17 +96,17 @@ namespace Hanssens.Net
             if (string.IsNullOrEmpty(serializedContent)) return;
 
             Storage.Clear();
-            Storage = JsonConvert.DeserializeObject<Store>(serializedContent);
+            Storage = JsonConvert.DeserializeObject<Store>(serializedContent, _config.SerializerSettings);
         }
 
         public void Store<T>(string key, T instance)
         {
             if (string.IsNullOrEmpty(key)) throw new ArgumentNullException(nameof(key));
             if (instance == null) throw new ArgumentNullException(nameof(instance));
-            
+
             if (_config.ReadOnly) throw new LocalStorageException(ErrorMessages.CannotExecuteStoreInReadOnlyMode);
 
-            var value = JsonConvert.SerializeObject(instance);
+            var value = JsonConvert.SerializeObject(instance, _config.SerializerSettings);
 
             if (Storage.Keys.Contains(key))
                 Storage.Remove(key);
@@ -125,14 +126,14 @@ namespace Hanssens.Net
         public void Persist()
         {
             if (_config.ReadOnly) throw new LocalStorageException(ErrorMessages.CannotExecutePersistInReadOnlyMode);
-            
-            var serialized = JsonConvert.SerializeObject(Storage, Formatting.Indented);
+
+            var serialized = JsonConvert.SerializeObject(Storage, Formatting.Indented, _config.SerializerSettings);
             var filepath = FileHelpers.GetLocalStoreFilePath(_config.Filename);
 
             var writemode = File.Exists(filepath)
                 ? FileMode.Truncate
                 : FileMode.Create;
-            
+
             lock (writeLock)
             {
                 using (var fileStream = new FileStream(filepath, mode: writemode, access: FileAccess.Write))

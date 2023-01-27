@@ -1,15 +1,15 @@
 ﻿using FluentAssertions;
-using Hanssens.Net;
+using RetroPipes;
 using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using FluentAssertions.Common;
-using Hanssens.Net.Helpers;
+using RetroPipes.Helpers;
 using Xunit;
-using LocalStorageTests.Stubs;
+using RetroPipes.LocalStorageTests.Stubs;
 
-namespace LocalStorageTests
+namespace RetroPipes.LocalStorageTests
 {
     public class LocalStorageTests
     {
@@ -69,7 +69,7 @@ namespace LocalStorageTests
         {
             // arrange
             var key = Guid.NewGuid().ToString();
-            var value = (double) 42.4m;
+            var value = (double)42.4m;
             var storage = new LocalStorage();
 
             // act
@@ -127,7 +127,7 @@ namespace LocalStorageTests
 
             // assert - last stored value should be the truth
             target.Should().NotBeNull();
-            target.IsSameOrEqualTo(expected_value);
+            target.Equals(expected_value);
         }
 
         [Fact(DisplayName = "LocalStorage.Clear() should clear all in-memory content")]
@@ -158,19 +158,19 @@ namespace LocalStorageTests
             var key1 = Guid.NewGuid().ToString();
             var value1 = "My kingdom for a file with a random name.";
             storage.Store(key1, value1);
-            
+
             // act
             storage.Persist();
 
             // assert
             var expectedFilepath = FileHelpers.GetLocalStoreFilePath(randomCustomFilename);
             File.Exists(expectedFilepath).Should().BeTrue(because: $"file '{expectedFilepath}'should be created during Persist()");
-            
+
             // cleanup
             storage.Destroy();
             File.Exists(expectedFilepath).Should().BeFalse(because: $"file '{expectedFilepath} should be deleted after Destroy()");
         }
-        
+
         [Fact(DisplayName = "LocalStorage.Persist() should create file on filesystem")]
         public void LocalStorage_Persist_Should_Create_File_On_Filesystem()
         {
@@ -178,18 +178,18 @@ namespace LocalStorageTests
             var defaultFilename = new LocalStorageConfiguration().Filename;
             var expectedFilepath = FileHelpers.GetLocalStoreFilePath(defaultFilename);
             if (File.Exists(expectedFilepath)) File.Delete(expectedFilepath);
-            
+
             var storage = new LocalStorage();
             var key1 = Guid.NewGuid().ToString();
             var value1 = "My kingdom for a file with a default name.";
             storage.Store(key1, value1);
-            
+
             // act
             storage.Persist();
 
             // assert
             File.Exists(expectedFilepath).Should().BeTrue(because: $"file '{expectedFilepath}'should be created during Persist()");
-            
+
             // cleanup
             storage.Destroy();
             File.Exists(expectedFilepath).Should().BeFalse(because: $"file '{expectedFilepath} should be deleted after Destroy()");
@@ -217,7 +217,7 @@ namespace LocalStorageTests
             target1.Should().Be(value1);
             target2.Should().Be(value2);
         }
-        
+
         [Fact(DisplayName = "LocalStorage.Store() should throw exception in readonly mode")]
         public void LocalStorage_Store_Should_Throw_Exception_In_ReadOnly_Mode()
         {
@@ -230,7 +230,7 @@ namespace LocalStorageTests
             var target = Assert.Throws<LocalStorageException>(() => storage.Store(key, value));
             target.Message.Should().Be(ErrorMessages.CannotExecuteStoreInReadOnlyMode);
         }
-        
+
         [Fact(DisplayName = "LocalStorage.Persist() should throw exception in readonly mode")]
         public void LocalStorage_Persist_Should_Throw_Exception_In_ReadOnly_Mode()
         {
@@ -241,7 +241,7 @@ namespace LocalStorageTests
             var target = Assert.Throws<LocalStorageException>(() => storage.Persist());
             target.Message.Should().Be(ErrorMessages.CannotExecutePersistInReadOnlyMode);
         }
-        
+
         [Fact(DisplayName = "LocalStorage.Remove() should delete existing key")]
         public void LocalStorage_Remove_Should_Delete_Existing_Key()
         {
@@ -254,11 +254,11 @@ namespace LocalStorageTests
 
             // act - remove key
             storage.Remove(key);
-            
+
             // assert - verify key has been removed
             storage.Exists(key).Should().BeFalse();
         }
-        
+
         [Fact(DisplayName = "LocalStorage.Remove() should not break on non-existing key")]
         public void LocalStorage_Remove_Should_Not_Break_On_NonExisting_Key()
         {
@@ -269,7 +269,7 @@ namespace LocalStorageTests
 
             // act - remove key that doesn't exist, should still continue
             storage.Remove(key);
-            
+
             // assert
             storage.Exists(key).Should().BeFalse(because: "key still should not exist");
         }
@@ -340,7 +340,7 @@ namespace LocalStorageTests
             // assert - make sure the entire operation is done in < 1sec. (psychological boundry, if you will)
             stopwatch.ElapsedMilliseconds.Should().BeLessOrEqualTo(1000);
         }
-        
+
         [Fact(DisplayName = "LocalStorage should perform decently with many iterations collections")]
         public void LocalStorage_Should_Perform_Decently_With_Many_Opens_And_Writes()
         {
@@ -352,7 +352,7 @@ namespace LocalStorageTests
                 storage.Store(Guid.NewGuid().ToString(), i);
                 storage.Persist();
             }
-            
+
             // cleanup
             var store = new LocalStorage();
             store.Destroy();
@@ -467,7 +467,7 @@ namespace LocalStorageTests
             {
                 Filename = random_filename
             };
-            
+
             var storage = new LocalStorage(config);
             storage.Persist();
 

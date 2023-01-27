@@ -1,4 +1,6 @@
-﻿namespace Hanssens.Net
+﻿using Newtonsoft.Json;
+
+namespace RetroPipes
 {
     /// <summary>
     /// Provides options to configure LocalStorage to behave just like you want it.
@@ -37,5 +39,10 @@
         public string Filename { get; set; } = ".localstorage";
 
         public bool ReadOnly { get; set; } = false;
+
+        /// <summary>
+        /// Settings for conversion to/from JSON.
+        /// </summary>
+        public JsonSerializerSettings SerializerSettings { get; set; } = new JsonSerializerSettings();
     }
 }

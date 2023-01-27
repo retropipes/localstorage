@@ -3,7 +3,7 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Hanssens.Net.Helpers
+namespace RetroPipes.Helpers
 {
     /// <summary>
     /// Helpers for encrypting and decrypting.
@@ -17,7 +17,7 @@ namespace Hanssens.Net.Helpers
         internal static string Decrypt(string password, string salt, string encrypted_value)
         {
             string decrypted;
-            
+
             using (var aes = Aes.Create())
             {
                 var keys = GetAesKeyAndIV(password, salt, aes);
@@ -97,13 +97,9 @@ namespace Hanssens.Net.Helpers
         {
             // inspired by @troyhunt: https://www.troyhunt.com/owasp-top-10-for-net-developers-part-7/
             const int bits = 8;
-            var key = new byte[16];
-            var iv = new byte[16];
-
-            var derive_bytes = new Rfc2898DeriveBytes(password, ToByteArray(salt));
-            key = derive_bytes.GetBytes(symmetricAlgorithm.KeySize / bits);
-            iv = derive_bytes.GetBytes(symmetricAlgorithm.BlockSize / bits);
-
+            var derive_bytes = new Rfc2898DeriveBytes(password, ToByteArray(salt), 1000000, HashAlgorithmName.SHA512);
+            var key = derive_bytes.GetBytes(symmetricAlgorithm.KeySize / bits);
+            var iv = derive_bytes.GetBytes(symmetricAlgorithm.BlockSize / bits);
             return new Tuple<byte[], byte[]>(key, iv);
         }
 

@@ -1,4 +1,4 @@
-namespace Hanssens.Net
+namespace RetroPipes
 {
     public static class ErrorMessages
     {

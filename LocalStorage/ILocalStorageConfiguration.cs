@@ -1,4 +1,6 @@
-﻿namespace Hanssens.Net
+﻿using Newtonsoft.Json;
+
+namespace RetroPipes
 {
     public interface ILocalStorageConfiguration
     {
@@ -32,10 +34,15 @@
         /// Filename for the persisted state on disk (defaults to ".localstorage").
         /// </summary>
         string Filename { get; set; }
-        
+
         /// <summary>
         /// Indicates if the mode is set . Defaults to false, allowing writes.
         /// </summary>
         bool ReadOnly { get; set; }
+
+        /// <summary>
+        /// Settings for conversion to/from JSON.
+        /// </summary>
+        JsonSerializerSettings SerializerSettings { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace LocalStorageTests.Stubs
+namespace RetroPipes.LocalStorageTests.Stubs
 {
     public class CarFactory
     {
@@ -9,7 +9,7 @@ namespace LocalStorageTests.Stubs
             var cars = new List<Car>();
 
             cars.Add(new Car() { Brand = "BMW", Model = "3-Series", Year = 2012 });
-            cars.Add(new Car(){ Brand = "BMW", Model = "5-Series", Year = 2017 });
+            cars.Add(new Car() { Brand = "BMW", Model = "5-Series", Year = 2017 });
             cars.Add(new Car() { Brand = "Mercedes-Benz", Model = "CLA 63", Year = 2016 });
 
             return cars;

@@ -1,4 +1,4 @@
-﻿namespace LocalStorageTests.Stubs
+﻿namespace RetroPipes.LocalStorageTests.Stubs
 {
     public class Joke
     {

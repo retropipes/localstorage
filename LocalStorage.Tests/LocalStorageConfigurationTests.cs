@@ -1,12 +1,12 @@
 ﻿using System;
 using System.IO;
 using FluentAssertions;
-using Hanssens.Net;
-using Hanssens.Net.Helpers;
+using RetroPipes;
+using RetroPipes.Helpers;
 using Microsoft.VisualStudio.TestPlatform.Utilities.Helpers;
 using Xunit;
 
-namespace LocalStorageTests
+namespace RetroPipes.LocalStorageTests
 {
     public class LocalStorageConfigurationTests
     {
@@ -24,12 +24,13 @@ namespace LocalStorageTests
         {
             // arrange - configure localstorage to use a custom filename
             var random_filename = Guid.NewGuid().ToString("N");
-            var config = new LocalStorageConfiguration() {
+            var config = new LocalStorageConfiguration()
+            {
                 Filename = random_filename
             };
 
             // act - store the container
-            var storage = new Hanssens.Net.LocalStorage(config);
+            var storage = new RetroPipes.LocalStorage(config);
             storage.Persist();
             var target = FileHelpers.GetLocalStoreFilePath(random_filename);
 

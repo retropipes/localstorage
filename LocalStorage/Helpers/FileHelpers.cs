@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace Hanssens.Net.Helpers
+namespace RetroPipes.Helpers
 {
     internal static class FileHelpers
     {

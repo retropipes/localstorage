@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Hanssens.Net
+namespace RetroPipes
 {
     public interface ILocalStorage
     {
@@ -57,7 +57,7 @@ namespace Hanssens.Net
         /// Simply doesn't do anything if the file is not found on disk.
         /// </remarks>
         void Load();
-        
+
         /// <summary>
         /// Removes an object from the LocalStorage.
         /// </summary>
