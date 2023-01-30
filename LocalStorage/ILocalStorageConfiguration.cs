@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json;
 
 namespace RetroPipes
 {
@@ -43,6 +43,6 @@ namespace RetroPipes
         /// <summary>
         /// Settings for conversion to/from JSON.
         /// </summary>
-        JsonSerializerSettings SerializerSettings { get; set; }
+        JsonSerializerOptions SerializerSettings { get; set; }
     }
 }

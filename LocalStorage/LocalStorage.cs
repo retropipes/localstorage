@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using RetroPipes.Helpers;
-using Newtonsoft.Json;
+using System.Text.Json;
 
 namespace RetroPipes
 {
@@ -79,7 +79,7 @@ namespace RetroPipes
             if (_config.EnableEncryption)
                 raw = CryptographyHelpers.Decrypt(_encryptionKey, _config.EncryptionSalt, raw);
 
-            return JsonConvert.DeserializeObject<T>(raw, _config.SerializerSettings);
+            return JsonSerializer.Deserialize<T>(raw, _config.SerializerSettings);
         }
 
         public IReadOnlyCollection<string> Keys()
@@ -96,7 +96,7 @@ namespace RetroPipes
             if (string.IsNullOrEmpty(serializedContent)) return;
 
             Storage.Clear();
-            Storage = JsonConvert.DeserializeObject<Store>(serializedContent, _config.SerializerSettings);
+            Storage = JsonSerializer.Deserialize<Store>(serializedContent, _config.SerializerSettings);
         }
 
         public void Store<T>(string key, T instance)
@@ -106,7 +106,7 @@ namespace RetroPipes
 
             if (_config.ReadOnly) throw new LocalStorageException(ErrorMessages.CannotExecuteStoreInReadOnlyMode);
 
-            var value = JsonConvert.SerializeObject(instance, _config.SerializerSettings);
+            var value = JsonSerializer.Serialize(instance, _config.SerializerSettings);
 
             if (Storage.Keys.Contains(key))
                 Storage.Remove(key);
@@ -127,7 +127,7 @@ namespace RetroPipes
         {
             if (_config.ReadOnly) throw new LocalStorageException(ErrorMessages.CannotExecutePersistInReadOnlyMode);
 
-            var serialized = JsonConvert.SerializeObject(Storage, Formatting.Indented, _config.SerializerSettings);
+            var serialized = JsonSerializer.Serialize(Storage, _config.SerializerSettings);
             var filepath = FileHelpers.GetLocalStoreFilePath(_config.Filename);
 
             var writemode = File.Exists(filepath)

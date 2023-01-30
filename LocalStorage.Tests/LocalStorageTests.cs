@@ -38,11 +38,11 @@ namespace RetroPipes.LocalStorageTests
             var storage = new LocalStorage();
 
             // act
-            storage.Store(key, expectedValue);
+            storage.Store<string>(key, expectedValue);
             storage.Persist();
 
             // assert
-            var target = storage.Get(key);
+            var target = storage.Get<string>(key);
             target.Should().BeOfType<string>();
             target.Should().Be(expectedValue);
         }
@@ -309,11 +309,11 @@ namespace RetroPipes.LocalStorageTests
             var storage = new LocalStorage();
 
             // act
-            storage.Store(key, expectedValue);
+            storage.Store<string>(key, expectedValue);
             storage.Persist();
 
             // assert
-            var target = storage.Get(key);
+            var target = storage.Get<string>(key);
             target.Should().BeOfType<string>();
             target.Should().Be(expectedValue);
         }
