@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net7.0</TargetFrameworks>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <!-- NuGet Specifics -->
+    <Authors>RetroPipes</Authors>
+    <Company />
+    <Description>A simple and lightweight, in-memory key/value-pair storage for persisting data in dotnet apps.</Description>
+    <PackageProjectUrl>https://github.com/retropipes/localstorage</PackageProjectUrl>
+    <PackageReleaseNotes>See the releases page on GitHub for release notes:
+      https://github.com/retropipes/localstorage/releases
+    </PackageReleaseNotes>
+    <PackageTags>c#, dotnet, storage, cache, nosql, keyvalue, database, lightweight</PackageTags>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/retropipes/localstorage</RepositoryUrl>
+    <RootNamespace>RetroPipes.Storage</RootNamespace>
+    <Title>LocalStorage</Title>
+    <Version>3.1.0</Version>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="Helpers" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="System.Text.Json" Version="7.0.1" />
+  </ItemGroup>
+</Project>
